@@ -74,8 +74,8 @@ public class CCAdapter extends RecyclerView.Adapter<CCAdapter.ViewHolder> {
     }
 
     public void addCreditCard(VirtualCard vc) {
-        vcArray.add(vc);
-        notifyItemInserted(vcArray.size() - 1);
+        vcArray.add(0, vc);
+        notifyItemInserted(0);
     }
 
     public void deleteCreditCard(String cardNumber) {
