@@ -1,20 +1,6 @@
-//
-//import android.support.v7.app.AppCompatActivity;
-//import android.os.Bundle;
-//
-//public class TwoFactor extends AppCompatActivity {
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_two_factor);
-//    }
-//
-//}
-
-
 package com.credit_cure.creditcuremobile;
 
+        import android.annotation.TargetApi;
         import android.app.KeyguardManager;
         import android.content.Context;
         import android.content.pm.PackageManager;
@@ -60,7 +46,10 @@ public class TwoFactor extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_two_factor);
+
+        textView = findViewById(R.id.textview);
+
 
         // If you’ve set your app’s minSdkVersion to anything lower than 23, then you’ll need to verify that the device is running Marshmallow
         // or higher before executing any fingerprint-related code
