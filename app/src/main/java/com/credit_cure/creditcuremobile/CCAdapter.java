@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -20,18 +21,29 @@ public class CCAdapter extends RecyclerView.Adapter<CCAdapter.ViewHolder> {
         this.vcArray = vcArray;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private CardView ccView;
         public TextView ccNumberView;
         public TextView cvvDateView;
         public TextView chargeAmountView;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             ccView = (CardView) itemView.findViewById(R.id.cc_card_view);
             ccNumberView = (TextView) itemView.findViewById(R.id.cardNumber);
             cvvDateView = (TextView) itemView.findViewById(R.id.cvv_date_textview);
             chargeAmountView = (TextView) itemView.findViewById(R.id.cc_charge_tb);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    VirtualCard vcInfo = vcArray.get(position);
+                    //TODO: Intent to get to the credit card screen
+
+                    Toast.makeText(itemView.getContext(), vcInfo.getCardNumber(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
@@ -48,6 +60,7 @@ public class CCAdapter extends RecyclerView.Adapter<CCAdapter.ViewHolder> {
         vh.ccNumberView.setText(vcArray.get(i).getCardNumber());
         vh.cvvDateView.setText(vcArray.get(i).getCvv() + "  " + vcArray.get(i).getDate());
         vh.chargeAmountView.setText(vcArray.get(i).getAmount());
+
     }
 
     @Override
@@ -58,5 +71,18 @@ public class CCAdapter extends RecyclerView.Adapter<CCAdapter.ViewHolder> {
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    public void addCreditCard(VirtualCard vc) {
+        vcArray.add(vc);
+        notifyItemInserted(vcArray.size() - 1);
+    }
+
+    public void deleteCreditCard(String cardNumber) {
+        for (int i = 0; i < vcArray.size(); i++) {
+            if (vcArray.get(i).getCardNumber().equals(cardNumber))
+                vcArray.remove(i);
+            notifyDataSetChanged();
+        }
     }
 }

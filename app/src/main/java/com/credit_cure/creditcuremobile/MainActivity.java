@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<VirtualCard> vc = new ArrayList<VirtualCard>();
         vc.add(new VirtualCard("1234 1234 1234 1234", "$78.12", "12/21", "512"));
         vc.add(new VirtualCard("1234 1234 1234 1234", "$78.12", "12/21", "512"));
-        vc.add(new VirtualCard("1234 1234 1234 1234", "$78.12", "12/21", "512"));
+        vc.add(new VirtualCard("6767 6767 7676 7676", "$78.12", "12/21", "512"));
 
         ccRecycclerView = (RecyclerView) findViewById(R.id.cc_recycler_view);
         ccLayoutManager = new LinearLayoutManager(this);
@@ -29,5 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
         CCAdapter ccAdapter = new CCAdapter(vc);
         ccRecycclerView.setAdapter(ccAdapter);
+
     }
 }
