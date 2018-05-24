@@ -1,6 +1,8 @@
 package com.credit_cure.creditcuremobile;
 
-public class VirtualCard {
+import java.io.Serializable;
+
+public class VirtualCard implements Serializable{
     private String cardNumber;
     private String amount;
     private String date;
