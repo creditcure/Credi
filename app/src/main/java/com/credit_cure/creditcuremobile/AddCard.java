@@ -83,9 +83,9 @@ public class AddCard extends AppCompatActivity {
                 String cardNumber = "";
                 for (int i = 0; i < 4; i++) {
                     if (i == 3)
-                        cardNumber += randNumGen.nextInt(10000);
+                        cardNumber += checkNumber(randNumGen.nextInt(10000));
                     else
-                        cardNumber += randNumGen.nextInt(10000) + " ";
+                        cardNumber += checkNumber(randNumGen.nextInt(10000)) + " ";
                 }
 
                 String cvv = "" + randNumGen.nextInt(1000);
@@ -101,6 +101,13 @@ public class AddCard extends AppCompatActivity {
         });
     }
 
+    private String checkNumber(int number) {
+        String retNumber  = "" + number;
+        while (retNumber.length() < 4) {
+            retNumber = "0" + retNumber;
+        }
+        return retNumber;
+    }
     private String barValToMonth(int value) {
         switch(value) {
             case 0:
