@@ -109,7 +109,7 @@ public class BluetoothActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v){
                     if(mConnectedThread != null) //First check to make sure thread created
-                        mConnectedThread.write("Credit Card #: 1234-5678-0000-9999");
+                        mConnectedThread.write("Credit Card #: 1234-5678-0000-9999 06/25 555");
                 }
             });
 
