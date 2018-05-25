@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "99853226827",
+    "firebase_url": "https://credit-cure.firebaseio.com",
+    "project_id": "credit-cure",
+    "storage_bucket": "credit-cure.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99853226827:android:a350fce470e36d13",
+        "android_client_info": {
+          "package_name": "com.credit_cure.creditcuremobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "99853226827-j3ub832i46vo4tqfol5udgo4prc8b6ij.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.credit_cure.creditcuremobile",
+            "certificate_hash": "428e1e4c4d42f5f7cb1fa1426d441cc838cc8879"
+          }
+        },
+        {
+          "client_id": "99853226827-stq557krh9kmmh25opi4am2b6gjql3i0.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "99853226827-stq557krh9kmmh25opi4am2b6gjql3i0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNJnzVD1sUCNSKpfZfJKZt7Df2v6IJdM0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "99853226827-stq557krh9kmmh25opi4am2b6gjql3i0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

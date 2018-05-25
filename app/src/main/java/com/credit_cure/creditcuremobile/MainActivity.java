@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         ccRecycclerView = (RecyclerView) findViewById(R.id.cc_recycler_view);
         ccLayoutManager = new LinearLayoutManager(this);
         ccRecycclerView.setLayoutManager(ccLayoutManager);
@@ -44,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             vcList.add(new VirtualCard("6767 6767 7676 7676", "$78.12", "12/21", "512"));
         }
 
+        FirebaseUtils.writeCardToFirebase(vcList.get(0));
         ccAdapter = new CCAdapter(vcList);
         ccRecycclerView.setAdapter(ccAdapter);
 
