@@ -4,8 +4,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,10 +40,20 @@ public class CCAdapter extends RecyclerView.Adapter<CCAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    VirtualCard vcInfo = vcArray.get(position);
-                    //TODO: Intent to get to the credit card screen
+                    final VirtualCard vcInfo = vcArray.get(position);
 
-                    Toast.makeText(itemView.getContext(), vcInfo.getCardNumber(), Toast.LENGTH_SHORT).show();
+                    PopupMenu popupMenu = new PopupMenu(itemView.getContext(), itemView);
+                    popupMenu.getMenuInflater().inflate(R.menu.delete_menu, popupMenu.getMenu());
+
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            FirebaseUtils.deleteCardFromFirebase(vcInfo.getId());
+                            return true;
+                        }
+                    });
+
+                    popupMenu.show();
                 }
             });
         }
@@ -84,5 +96,9 @@ public class CCAdapter extends RecyclerView.Adapter<CCAdapter.ViewHolder> {
                 vcArray.remove(i);
             notifyDataSetChanged();
         }
+    }
+
+    public void setVcArray(ArrayList<VirtualCard> vcArray) {
+        this.vcArray = vcArray;
     }
 }

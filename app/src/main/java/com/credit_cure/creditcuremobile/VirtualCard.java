@@ -3,10 +3,31 @@ package com.credit_cure.creditcuremobile;
 import java.io.Serializable;
 
 public class VirtualCard implements Serializable{
-    private String cardNumber;
-    private String amount;
-    private String date;
-    private String cvv;
+    public String cardNumber;
+    public String amount;
+    public String date;
+    public String cvv;
+
+    public VirtualCard() {
+
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        VirtualCard vc = (VirtualCard) obj;
+
+        return vc.getCardNumber().equals(this.cardNumber);
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String id;
 
     public VirtualCard(String cardNumber, String amount, String date, String cvv) {
         this.cardNumber = cardNumber;

@@ -9,17 +9,29 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView ccRecycclerView;
     private CCAdapter ccAdapter;
     private RecyclerView.LayoutManager ccLayoutManager;
+    private ProgressBar pBar;
 
     private ArrayList<VirtualCard> vcList;
-    ;
+
+    private DatabaseReference databaseReference;
 
     public static final String CARD_PARCEL = "card_list_parcel";
 
@@ -28,22 +40,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        pBar = (ProgressBar) findViewById(R.id.progressBar);
+        pBar.setVisibility(View.VISIBLE);
+
+        vcList = new ArrayList<VirtualCard>();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.addChildEventListener(childEventListener);
+        databaseReference.addValueEventListener(cardListener);
+
         ccRecycclerView = (RecyclerView) findViewById(R.id.cc_recycler_view);
         ccLayoutManager = new LinearLayoutManager(this);
         ccRecycclerView.setLayoutManager(ccLayoutManager);
 
         if (getIntent().getExtras() != null) {
-            vcList = (ArrayList<VirtualCard>) getIntent().getExtras()
-                    .getSerializable(MainActivity.CARD_PARCEL);
-        } else {
-            Log.d("TEST", "onCreate: Creating the list");
-            vcList = new ArrayList<VirtualCard>();
-            vcList.add(new VirtualCard("1234 1234 1234 1234", "$78.12", "12/21", "512"));
-            vcList.add(new VirtualCard("1234 1234 1234 1234", "$78.12", "12/21", "512"));
-            vcList.add(new VirtualCard("6767 6767 7676 7676", "$78.12", "12/21", "512"));
+            VirtualCard vc = (VirtualCard) getIntent().getExtras().getSerializable(MainActivity.CARD_PARCEL);
+            FirebaseUtils.writeCardToFirebase(vc);
         }
 
-        FirebaseUtils.writeCardToFirebase(vcList.get(0));
         ccAdapter = new CCAdapter(vcList);
         ccRecycclerView.setAdapter(ccAdapter);
 
@@ -66,4 +80,58 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    ValueEventListener cardListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            vcList = new ArrayList<VirtualCard>();
+
+            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                VirtualCard vc = postSnapshot.getValue(VirtualCard.class);
+                vc.setId(postSnapshot.getKey());
+                vcList.add(vc);
+            }
+
+            pBar.setVisibility(View.INVISIBLE);
+            Collections.reverse(vcList);
+            ccAdapter.setVcArray(vcList);
+            ccAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            System.out.print("Bad");
+        }
+    };
+
+    ChildEventListener childEventListener = new ChildEventListener() {
+        @Override
+        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+        }
+
+        @Override
+        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onChildRemoved(DataSnapshot dataSnapshot) {
+            VirtualCard vc = dataSnapshot.getValue(VirtualCard.class);
+
+            for (int i = 0; i < vcList.size(); i++) {
+                if (vcList.get(i).equals(vc))
+                    vcList.remove(i);
+            }
+        }
+
+        @Override
+        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
 }

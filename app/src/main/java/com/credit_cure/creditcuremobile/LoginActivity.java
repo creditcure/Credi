@@ -38,7 +38,8 @@ public class LoginActivity extends AppCompatActivity {
                 login();
             }
         });
-
+        _emailText.setText("maxhuddleston@gmail.com");
+        _passwordText.setText("a;dfadfa");
 
     }
 
@@ -60,6 +61,8 @@ public class LoginActivity extends AppCompatActivity {
 
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
+
+
 
 //        new android.os.Handler().postDelayed(
 //                new Runnable() {

@@ -93,10 +93,9 @@ public class AddCard extends AppCompatActivity {
                 String balance = cardAmountText.getText().toString().trim();
 
                 VirtualCard vc = new VirtualCard(cardNumber, balance, date, cvv);
-                vcList.add(0, vc);
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra(MainActivity.CARD_PARCEL, vcList);
+                intent.putExtra(MainActivity.CARD_PARCEL, vc);
                 startActivity(intent);
             }
         });
