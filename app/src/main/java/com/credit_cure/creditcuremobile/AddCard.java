@@ -29,7 +29,7 @@ public class AddCard extends AppCompatActivity {
         setContentView(R.layout.activity_add_card);
 
         vcList =
-                (ArrayList<VirtualCard>) getIntent().getParcelableExtra(MainActivity.CARD_PARCEL);
+                (ArrayList<VirtualCard>) getIntent().getExtras().getSerializable(MainActivity.CARD_PARCEL);
 
         cardAmountText = (EditText) findViewById(R.id.add_card_amount);
         monthBar = (SeekBar) findViewById(R.id.monthSeek);
@@ -40,6 +40,8 @@ public class AddCard extends AppCompatActivity {
     }
 
     private void setupWidgets() {
+        cardAmountText.setText("$");
+        cardAmountText.setSelection(1);
         cardAmountText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -53,6 +55,7 @@ public class AddCard extends AppCompatActivity {
                 String input = s.toString();
                 if (!input.startsWith("$"))
                     cardAmountText.setText("$" + input);
+                cardAmountText.setSelection(cardAmountText.getText().toString().length());
             }
         });
 
@@ -90,6 +93,8 @@ public class AddCard extends AppCompatActivity {
                 String balance = cardAmountText.getText().toString().trim();
 
                 VirtualCard vc = new VirtualCard(cardNumber, balance, date, cvv);
+                vcList.add(0, vc);
+
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra(MainActivity.CARD_PARCEL, vcList);
                 startActivity(intent);

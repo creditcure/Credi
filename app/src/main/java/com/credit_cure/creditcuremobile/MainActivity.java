@@ -33,8 +33,9 @@ public class MainActivity extends AppCompatActivity {
         ccLayoutManager = new LinearLayoutManager(this);
         ccRecycclerView.setLayoutManager(ccLayoutManager);
 
-        if (getIntent().getParcelableExtra(CARD_PARCEL) != null) {
-            vcList = (ArrayList<VirtualCard>) getIntent().getParcelableExtra(MainActivity.CARD_PARCEL);
+        if (getIntent().getExtras() != null) {
+            vcList = (ArrayList<VirtualCard>) getIntent().getExtras()
+                    .getSerializable(MainActivity.CARD_PARCEL);
         } else {
             Log.d("TEST", "onCreate: Creating the list");
             vcList = new ArrayList<VirtualCard>();
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_add_card) {
             Intent intent = new Intent(this, AddCard.class);
+            intent.putExtra(MainActivity.CARD_PARCEL, vcList);
             startActivity(intent);
             return true;
         }
