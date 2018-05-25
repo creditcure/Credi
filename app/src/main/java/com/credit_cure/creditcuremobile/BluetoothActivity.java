@@ -45,7 +45,7 @@ public class BluetoothActivity extends AppCompatActivity {
     private ConnectedThread mConnectedThread; // bluetooth background worker thread to send and receive data
     private BluetoothSocket mBTSocket = null; // bi-directional client-to-client data path
 
-    private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // "random" unique identifier
+    private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-012321232123"); // "random" unique identifier
 
 
     // #defines for identifying shared types between calling functions
@@ -109,7 +109,7 @@ public class BluetoothActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v){
                     if(mConnectedThread != null) //First check to make sure thread created
-                        mConnectedThread.write("1");
+                        mConnectedThread.write("Credit Card #: 1234-5678-0000-9999");
                 }
             });
 
