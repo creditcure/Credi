@@ -34,13 +34,13 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:25.0.1'
-    compile 'com.android.support:design:25.0.1'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.1.0'
-    implementation 'com.android.support:design:27.1.0'
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-}
+compile fileTree(dir: 'libs', include: ['*.jar'])
+compile 'com.android.support:appcompat-v7:25.0.1'
+compile 'com.android.support:design:25.0.1'
+compile 'com.jakewharton:butterknife:7.0.1'
+implementation fileTree(dir: 'libs', include: ['*.jar'])
+implementation 'com.android.support:appcompat-v7:27.1.0'
+implementation 'com.android.support:design:27.1.0'
+implementation 'com.jakewharton:butterknife:8.8.1'
+annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
