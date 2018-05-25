@@ -1,0 +1,11 @@
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .gitignore	(date 1527196675000)
++++ .gitignore	(date 1527196675000)
+@@ -0,0 +1,2 @@
++app/build
++.idea
+\ No newline at end of file
