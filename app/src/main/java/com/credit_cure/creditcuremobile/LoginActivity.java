@@ -1,4 +1,4 @@
-package com.sourcey.materiallogindemo;
+package com.credit_cure.creditcuremobile;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -29,6 +28,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        Log.e("oncreate", "onCreate: PASFDJAKSD;FAKSDLFJASD;LFKJA;SDKLFJA;SDFKASDFSA");
         
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -60,15 +61,17 @@ public class LoginActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
+//        new android.os.Handler().postDelayed(
+//                new Runnable() {
+//                    public void run() {
+//                        // On complete call either onLoginSuccess or onLoginFailed
+//                        onLoginSuccess();
+//                        // onLoginFailed();
+//                        progressDialog.dismiss();
+//                    }
+//                }, 3000);
+
+        startActivity(new Intent(this, MainActivity.class));
     }
 
 
